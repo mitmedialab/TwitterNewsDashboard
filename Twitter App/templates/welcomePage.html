@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<title>Twitter User Search</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+
+<body>
+
+<h1>Welcome to the Twitter User Search Page!</h1>
+<h2>Twitter User Search Engine</h2>
+
+<form action="{{ url_for('search') }}" method=post>
+	Username: <input type=text name=username><br><br>
+	User ID: <input type=text name=ID><br><br>
+	<input type=submit value=Submit>
+</form>
+
+<p><b>Instructions: </b>Fill in the fields to the best of your ability, and this engine will return all
+matching results. If no results are found, then it will display 'No results for these
+field inputs'</p>
+
+</body>
+
+
+</html>

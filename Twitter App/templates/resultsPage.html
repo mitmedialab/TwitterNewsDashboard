@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<title>Twitter User Search</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+
+<head>
+<style>
+table, th, td {
+	border: 1px solid black;
+}
+
+td, th {
+	text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Twitter User Search Page</h1>
+<h2>Twitter User Search Engine</h2>
+
+<form action="{{ url_for('search') }}" method=post>
+	Username: <input type=text name=username><br><br>
+	User ID: <input type=text name=ID><br><br>
+	<input type=submit value=Submit>
+</form>
+
+{% block body %}
+
+{% if matches == 'Empty' %}<p>Search fields are empty</p>
+{% elif count == 0 %}<p>No results for these field inputs</p>
+{% else %}
+	<p>{{ count }} matches found:</p>
+	<table>
+		<tr>
+			<th>Username</th>
+			<th>User ID</th>
+			<th>Friend Count</th>
+			<th>Account Creation Date</th>
+			<th>Friend Count</th>
+			<th>Follower Count</th>
+			<th>Tweet Count</th>
+			<th>Favorites Count</th>
+			<th>Organization Count</th>
+		</tr>
+		
+	{% for match in matches %}
+		<tr>
+			<td>{{ match['Username'] }}</td>
+			<td>{{ match['User ID'] }}</td>
+			<td>{{ match['Friend Count'] }}</td>
+			<td>{{ match['Account Creation Date'] }}</td>
+			<td>{{ match['Friend Count'] }}</td>
+			<td>{{ match['Follower Count'] }}</td>
+			<td>{{ match['Tweet Count'] }}</td>
+			<td>{{ match['Favorites Count'] }}</td>
+			<td>{{ match['Organization Count'] }}</td>
+		</tr>
+	{% endfor %}
+	
+	</table>
+{% endif %}
+
+{% endblock %}
+
+<p><b>Instructions: </b>Fill in the fields to the best of your ability, and this engine will return all
+matching results. If no results are found, then it will display 'No results for these
+field inputs'</p>
+
+</body>
+
+
+</html>
