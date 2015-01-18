@@ -29,15 +29,14 @@ td, th {
 
 {% block body %}
 
-{% if matches == 'Empty' %}<p>Search fields are empty</p>
-{% elif count == 0 %}<p>No results for these field inputs</p>
+{% if match == 'Empty' %}<p>Search fields are empty</p>
+{% elif not match %}<p><b style="color:red">ERROR: </b>{{ err_message }}</p>
 {% else %}
-	<p>{{ count }} matches found:</p>
+	<p>User has been found!</p>
 	<table>
 		<tr>
 			<th>Username</th>
 			<th>User ID</th>
-			<th>Friend Count</th>
 			<th>Account Creation Date</th>
 			<th>Friend Count</th>
 			<th>Follower Count</th>
@@ -45,12 +44,10 @@ td, th {
 			<th>Favorites Count</th>
 			<th>Organization Count</th>
 		</tr>
-		
-	{% for match in matches %}
+
 		<tr>
 			<td>{{ match['Username'] }}</td>
 			<td>{{ match['User ID'] }}</td>
-			<td>{{ match['Friend Count'] }}</td>
 			<td>{{ match['Account Creation Date'] }}</td>
 			<td>{{ match['Friend Count'] }}</td>
 			<td>{{ match['Follower Count'] }}</td>
@@ -58,7 +55,6 @@ td, th {
 			<td>{{ match['Favorites Count'] }}</td>
 			<td>{{ match['Organization Count'] }}</td>
 		</tr>
-	{% endfor %}
 	
 	</table>
 {% endif %}
@@ -66,10 +62,8 @@ td, th {
 {% endblock %}
 
 <p><b>Instructions: </b>Fill in the fields to the best of your ability, and this engine will return all
-matching results. If no results are found, then it will display 'No results for these
-field inputs'</p>
+matching results. If there is an error while processing the request, the webpage will display 'ERROR:
+Twitter was unable to process your request: ' followed by the error message.</p>
 
 </body>
-
-
 </html>

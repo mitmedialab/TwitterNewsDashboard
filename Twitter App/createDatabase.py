@@ -1,7 +1,7 @@
 from csv import reader
 from pymongo import MongoClient
 
-filename = "twitterSampleData.csv" # change filepath if necessary
+filename = "C:\\Users\\Greg\\Desktop\\Flask Tutorial\\twitterApp\\twitterSampleData.csv"
 reader = reader(open(filename, 'r'))
 
 data = []
