@@ -1,6 +1,6 @@
 from flask import Flask, g, render_template, request
 from twitterSearchEngine import searchTwitter
-from pymongo import MongoClient
+from pymongo import MongoClient, ASCENDING
 from time import time
 
 DEBUG = True
@@ -36,10 +36,10 @@ def search():
     if request.method == 'POST':
         search_params = {}
         
-        if request.form['username']:
+        if request.form.get('username'):
             search_params['Username'] = request.form['username']
 
-        if request.form['ID']:
+        if request.form.get('ID'):
             search_params['User ID'] = request.form['ID']
 
         err_message = None
@@ -76,13 +76,21 @@ def search():
                              'Tweet Count'           : result[5],
                              'Favorites Count'       : result[6],
                              'Organization Count'    : result[7],
-                             'Timestamp'             : result[8]}
+                             'Image URL'             : result[8],
+                             'Timestamp'             : result[9]}
                     
                     g.posts.update({'Username' : result[0],
                                     'User ID'  : result[1]},
                                    match, upsert = True)
                 
         return render_template('resultsPage.html', match = match, err_message = err_message)
+
+@app.route('/display')
+def displayUsers():
+    userList = list(g.posts.find(fields = {'Username' : True, 'User ID' : True,
+                                           '_id' : False},
+                                 sort = [('Username', ASCENDING)]))
+    return render_template('databasePage.html', userList = userList)
     
 if __name__ == '__main__':
     app.run()

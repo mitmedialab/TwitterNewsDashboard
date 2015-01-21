@@ -7,8 +7,10 @@
 <body>
 
 <h1>Welcome to the Twitter User Search Page!</h1>
-<h2>Twitter User Search Engine</h2>
+<div style="text-align:center;"><a href="{{ url_for('welcome') }}">Home</a></div>
+<div style="text-align:center;"><a href="{{ url_for('displayUsers') }}">Twitter Users on File</a></div>
 
+<h2>Twitter User Search Engine</h2>
 <form action="{{ url_for('search') }}" method=post>
 	Username: <input type=text name=username><br><br>
 	User ID: <input type=text name=ID><br><br>
@@ -20,6 +22,4 @@ matching results. If there is an error while processing the request, the webpage
 Twitter was unable to process your request: ' followed by the error message.</p>
 
 </body>
-
-
 </html>

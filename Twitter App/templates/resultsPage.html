@@ -19,8 +19,10 @@ td, th {
 <body>
 
 <h1>Twitter User Search Page</h1>
-<h2>Twitter User Search Engine</h2>
+<div style="text-align:center;"><a href="{{ url_for('welcome') }}">Home</a></div>
+<div style="text-align:center;"><a href="{{ url_for('displayUsers') }}">Twitter Users on File</a></div>
 
+<h2>Twitter User Search Engine</h2>
 <form action="{{ url_for('search') }}" method=post>
 	Username: <input type=text name=username><br><br>
 	User ID: <input type=text name=ID><br><br>
@@ -33,6 +35,7 @@ td, th {
 {% elif not match %}<p><b style="color:red">ERROR: </b>{{ err_message }}</p>
 {% else %}
 	<p>User has been found!</p>
+	<img src="{{ match['Image URL'] }}" alt="No Image Available" width="100" height="100">
 	<table>
 		<tr>
 			<th>Username</th>

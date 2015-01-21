@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<title>Twitter User Search</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+
+<body>
+
+<h1>List of Twitter Users on File</h1>
+<div style="text-align:center;"><a href="{{ url_for('welcome') }}">Home</a></div>
+<div style="text-align:center;"><a href="{{ url_for('displayUsers') }}">Twitter Users on File</a></div>
+
+{% block body %}
+{% if not userList %}<p>There are no Twitter users on file</p>
+{% else %}
+	<p>Below is a list of the users that our database has on file. If you wish to learn more about a particular
+	user,<br> just click the username, and you will be taken to another webpage displaying more information</p>
+	{% for user in userList %}
+		<div><form id="{{ user['User ID'] }}" action="{{ url_for('search') }}" method=post>
+			<input type=text name=username value= "{{ user['Username'] }}"
+			onclick="document.getElementById('{{ user['User ID'] }}').submit()"
+			style="font-size:30px;border:none;outline:none;">
+		</form></div>
+	{% endfor %}
+{% endif %}
+{% endblock %}
+
+</body>
+</html>
