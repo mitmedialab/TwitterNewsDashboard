@@ -1,13 +1,35 @@
 from tweepy import *
 from time import time
+from json import load
 
-consumer_key = ""
-consumer_secret = ""
-access_token = ""
-access_secret = ""
+# In order to access the Twitter API with this module, you will need to store
+# a 'twitterConfig.json' file in the same directory as the module that contains
+# the following data:
+#
+# {
+#   'consumer_key'    : <consumer_key>,
+#   'consumer_secret' : <consumer_secret>,
+#   'access_token'    : <access_token>,
+#   'access_secret'   : <access_secret>
+# }
+#
+# All four of these things can be obtained by requesting access to the Twitter
+# API by visiting https://dev.twitter.com/
 
-auth = OAuthHandler(consumer_key, consumer_secret)
-auth.set_access_token(access_token, access_secret)
+try:
+    jsonFile = "twitterConfig.json"
+    jsonData = open(jsonFile, 'r')
+    authData = load(jsonData)
+
+except:
+    print "Missing 'twitterConfig.json' file!"
+    print "Aborting Twitter access immediately"
+    
+    import sys
+    sys.exit(-1)    
+
+auth = OAuthHandler(authData['consumer_key'], authData['consumer_secret'])
+auth.set_access_token(authData['access_token'], authData['access_secret'])
 api = API(auth)
 
 doesNotExistMessage = "[{u'message': u'Sorry, that page does not exist', u'code': 34}]"
