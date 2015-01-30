@@ -35,7 +35,7 @@ def welcome():
 def search():
     if request.method == 'POST':
         search_params = {}
-        
+
         if request.form.get('username'):
             search_params['Username'] = request.form['username']
 

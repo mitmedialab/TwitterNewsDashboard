@@ -28,9 +28,17 @@ except:
     import sys
     sys.exit(-1)    
 
-auth = OAuthHandler(authData['consumer_key'], authData['consumer_secret'])
-auth.set_access_token(authData['access_token'], authData['access_secret'])
-api = API(auth)
+try:
+    auth = OAuthHandler(authData['consumer_key'], authData['consumer_secret'])
+    auth.set_access_token(authData['access_token'], authData['access_secret'])
+    api = API(auth)
+
+except:
+    print "Improper configuraton of 'twitterConfig.json' file!"
+    print "Aborting Twitter access immediately"
+
+    import sys
+    sys.exit(-1)
 
 doesNotExistMessage = "[{u'message': u'Sorry, that page does not exist', u'code': 34}]"
 
