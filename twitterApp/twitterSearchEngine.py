@@ -1,4 +1,5 @@
 from tweepy import *
+from os import getcwd
 from time import time
 from json import load
 
@@ -17,7 +18,9 @@ from json import load
 # API by visiting https://dev.twitter.com/
 
 try:
-    jsonFile = "twitterConfig.json"
+    projDir = getcwd() + "TwitterNewsDashboard/twitterApp"
+    jsonFile = projDir + "twitterConfig.json"
+    
     jsonData = open(jsonFile, 'r')
     authData = load(jsonData)
 
