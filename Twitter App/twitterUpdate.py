@@ -93,4 +93,4 @@ def displayUsers():
     return render_template('databasePage.html', userList = userList)
     
 if __name__ == '__main__':
-    app.run()
+    app.run(host = '0.0.0.0')
