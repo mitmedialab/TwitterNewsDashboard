@@ -18,9 +18,16 @@ from json import load
 # API by visiting https://dev.twitter.com/
 
 try:
-    projDir = getcwd() + "/TwitterNewsDashboard/twitterApp"
+    projDir = "/TwitterNewsDashboard/twitterApp"
+    currentDir = getcwd()
+
+    if projDir not in currentDir:
+	projDir = currentDir + projDir
+
+    else:
+	projDir = currentDir
+
     jsonFile = projDir + "/twitterConfig.json"
-    
     jsonData = open(jsonFile, 'r')
     authData = load(jsonData)
 
